@@ -1,59 +1,45 @@
-const albumImage = document.getElementById('albumImage');
-const audioPlayer = document.getElementById('audioPlayer');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+// chamdando variaveis
+const progressBar = document.getElementById("progressBar");
+const buttonPlay = document.querySelector('#play');
+const buttonPause = document.querySelector('#pause');
+const tempoAtual = document.getElementById("tempoAtual");
+const tempoTotal = document.getElementById("tempoTotal");
 
-const songs = [
-    {
-        title: 'Song 1',
-        audio: 'song1.mp3',
-        albumCover: 'album1.jpg'
-    },
-    {
-        title: 'Song 2',
-        audio: 'song2.mp3',
-        albumCover: 'album2.jpg'
-    },
-    {
-        title: 'Song 3',
-        audio: 'song3.mp3',
-        albumCover: 'album3.jpg'
-    }
-];
+// metodo de audio
 
-let currentSongIndex = 0;
+const music = new Audio('./assets/YUMMI (Super Slowed) (320).mp3');
+let interval;
 
-function loadSong(songIndex) {
-    const song = songs[songIndex];
-    albumImage.src = song.albumCover;
-    audioPlayer.src = song.audio;
+//funçoes
+
+function formatarTempo(segundos) {
+  const min = Math.floor(segundos / 60);
+  const seg = Math.floor(segundos % 60);
+  return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
 }
 
-function playPauseSong() {
-    if (audioPlayer.paused) {
-        audioPlayer.play();
-        playPauseBtn.textContent = 'Pause';
-    } else {
-        audioPlayer.pause();
-        playPauseBtn.textContent = 'Play';
-    }
+function updateMusicTime() {
+  const progresso = (music.currentTime / music.duration) * 100;
+  progressBar.value = progresso;
+  tempoAtual.textContent = formatarTempo(music.currentTime);
 }
 
-function prevSong() {
-    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-    loadSong(currentSongIndex);
-    playPauseSong();
+music.addEventListener('loadedmetadata', function () {
+  tempoTotal.textContent = formatarTempo(music.duration);
+});
+
+function play() {
+  buttonPlay.classList.add('hide');
+  buttonPause.classList.remove('hide');
+  music.play();
+  interval = setInterval(updateMusicTime, 1000);
 }
 
-function nextSong() {
-    currentSongIndex = (currentSongIndex + 1) % songs.length;
-    loadSong(currentSongIndex);
-    playPauseSong();
+function pause() {
+  buttonPlay.classList.remove('hide');
+  buttonPause.classList.add('hide');
+  music.pause();
 }
 
-playPauseBtn.addEventListener('click', playPauseSong);
-prevBtn.addEventListener('click', prevSong);
-nextBtn.addEventListener('click', nextSong);
-
-loadSong(currentSongIndex);
+buttonPlay.addEventListener('click', play);
+buttonPause.addEventListener('click', pause);
