@@ -5,6 +5,9 @@ const buttonPause = document.querySelector('#pause');
 const tempoAtual = document.getElementById("tempoAtual");
 const tempoTotal = document.getElementById("tempoTotal");
 
+const buttonVoltar = document.querySelector('#voltar');
+const buttonAvançar = document.querySelector('#avancar');
+
 // metodo de audio
 
 const music = new Audio('./assets/YUMMI (Super Slowed) (320).mp3');
@@ -27,6 +30,16 @@ function updateMusicTime() {
 music.addEventListener('loadedmetadata', function () {
   tempoTotal.textContent = formatarTempo(music.duration);
 });
+
+buttonVoltar.addEventListener('click', () => {
+  window.location.href = 'index3.html';
+});
+
+buttonAvançar.addEventListener('click', () => {
+  window.location.href = 'index2.html';
+});
+
+
 
 function play() {
   buttonPlay.classList.add('hide');
