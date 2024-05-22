@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desafio Api</title>
+  <link rel="stylesheet" href="./style3.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card-player">
+      <div class="conteudo-musica">
+        <img src="./assets/liedow.jpg" alt="">
+        <div class="desc-musica">
+          <p>yummi</p>
+          <span>Super slowed</span>
+        </div>
+      </div>
+      <div class="controles">
+        <button id="voltar"><img src="./assets/voltar.png" alt="voltar"></button>
+        <button id="play"><img src="./assets/play.png" alt="play"></button>
+        <button id="pause" class="hide"><img src="./assets/pause.png" alt="pause"></button>
+        <button id="avancar"><img src="./assets/avancar.png" alt="avancar"></button>
+      </div>
+      <div class="container-progresso">
+        <input id="progressBar" type="range" value="0" min="0" max="100" step="1">
+      </div>
+      <div class="tempo-musica">
+        <span id="tempoAtual">00:00</span>
+        <span id="tempoTotal">04:09</span>
+      </div>
+    </div>
+  </div>
+  <script src="./script3.js"></script>
+</body>
+
+</html>
